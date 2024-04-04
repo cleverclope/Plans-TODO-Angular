@@ -6,8 +6,6 @@ import { PlansThisWeekComponent } from './plans-this-week/plans-this-week.compon
 const thisweekRoutes:Routes=[
   { path: '', redirectTo:'Plans', pathMatch:'full'},
   { path:'Plans', component: PlansThisWeekComponent}
-
-
 ]
 
 @NgModule({
