@@ -10,6 +10,8 @@ import { UpdatePlanComponent } from './update-plan/update-plan.component';
 import { AgendaThisWeekRoutesModule } from './agenda-this-week-routes.module';
 import { PlansThisWeekComponent } from './plans-this-week/plans-this-week.component';
 import { MaterialModule } from '../material/material.module';
+import { HttpClientModule } from '@angular/common/http';
+import { PlansService } from './plans.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,10 @@ import { MaterialModule } from '../material/material.module';
   imports: [
     CommonModule,
     AgendaThisWeekRoutesModule,
-    MaterialModule
-  ]
+    MaterialModule,
+    HttpClientModule
+  ],
+
+  providers:[PlansService]
 })
 export class AgendaThisWeekModule { }

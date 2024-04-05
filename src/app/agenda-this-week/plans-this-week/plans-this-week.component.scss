@@ -1,0 +1,30 @@
+.example-spacer {
+  flex: 1 1;
+}
+
+.table-container {
+  max-height: 700px;
+  overflow: auto;
+}
+
+.tasks-header {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.header{
+  display: flex;
+}
+
+.tasks-filter{
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  margin-right: auto;
+}
+
+button{
+  margin: 10px;
+  border-radius: 10px;
+  height: 50px;
+}

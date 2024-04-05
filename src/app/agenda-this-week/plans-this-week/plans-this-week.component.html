@@ -1,1 +1,62 @@
-<p>plans-this-week works!</p>
+<div>
+  <mat-toolbar class="!h-16 mat-elevation-z3 !bg-slate-50">
+    <span>PLAN THIS WEEK</span>
+    <span class="example-spacer"></span>
+    <button mat-raised-button class="rounded-2xl" (click)="newPlan()">New Task </button>
+  </mat-toolbar>
+</div>
+
+<section class="table-container mat-elevation-z2 mx-2" tabindex="0">
+  <h2 class="h-8 font-bold mx-2 my-1 text-lg">Planning My Week </h2>
+  <table class="mat-elevation-z2" mat-table [dataSource]="tasksDataSource" matSort fxFlexFill>
+
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </th>
+
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let index = index"> {{ index + 1 }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="taskName">
+      <th mat-header-cell *matHeaderCellDef class="mat-header-cell" mat-sort-header scope="col"> Task Name</th>
+      <td mat-cell *matCellDef="let s">
+        {{ s.taskName}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef class="mat-header-cell" mat-sort-header scope="col">Action </th>
+      <td mat-cell *matCellDef="let s">
+        <a mat-flat-button (click)="onEditTask(s)" class="rounded"
+          style="background-color: rgb(141, 141, 206); margin-right: 10px; color: white;" matTooltip="Edit Item">Edit
+        </a>
+
+        <a mat-flat-button (click)="onDeleteTask()" class="rounded"
+        style="background-color: rgb(141, 141, 206); margin-right: 10px; color: white;" matTooltip="Delete Task">Delete
+      </a>
+       </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="mat-header-row tasks-header"
+      style="background-color: rgb(226, 246, 252);"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns" class="mat-row !h-5 hover:bg-sky-100"></tr>
+
+  </table>
+
+  <div style="margin-top: 5px"></div>
+  <div fxLayout fxLayoutAlign="end">
+    <mat-paginator [pageSizeOptions]="[13, 30, 60, 90, 150]" aria-label="Select page of users"></mat-paginator>
+  </div>
+</section>

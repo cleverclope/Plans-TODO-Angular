@@ -1,1 +1,41 @@
-<p>new-plan works!</p>
+
+<div class="task">
+  <header>
+    <button class="btn" mat-button (click)="onCloseDialog()">
+        <mat-icon>clear</mat-icon>
+    </button>
+  </header>
+
+<mat-toolbar fxLayoutAlign="center center" class="new-inventory !text-xl">Create New Task for The Week</mat-toolbar>
+
+    <mat-dialog-content class="mat-typography" fxLayout="row">
+      <form [formGroup]="newTaskFormGroup" onsubmit="newTaskFormGroup">
+
+      <div fxLayoutGap="10px">
+        <mat-form-field class="inventory-field">
+          <mat-label>Task Name</mat-label>
+          <input matInput formControlName="taskName" placeholder="Enter Task Name" required minlength="3">
+          <mat-icon matSuffix>info</mat-icon>
+        </mat-form-field>
+        </div>
+
+      </form>
+      </mat-dialog-content>
+
+      <div fxLayout="row" fxLayoutGap="20px">
+        <div fxFlex="10" style="text-align: center; ">
+          <mat-progress-spinner [diameter]="50" mode="indeterminate" *ngIf="isSavingNewTask">Wait ...</mat-progress-spinner>
+        </div>
+
+      <div fxFlex style="text-align: end; ">
+         <button mat-raised-button
+          type="submit"
+          (click)="newTask()"
+          [disabled]="newTaskFormGroup.invalid"
+           color="primary" >
+          <mat-icon>save</mat-icon>Submit
+      </button>
+      </div>
+      </div>
+
+

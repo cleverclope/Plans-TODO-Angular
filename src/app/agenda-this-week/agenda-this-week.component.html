@@ -1,1 +1,53 @@
-<router-outlet></router-outlet>
+<div>
+  <mat-toolbar class="!h-16 mat-elevation-z0 !bg-slate-200">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>PLAN THIS WEEK</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon matTooltip="Add Plan">add</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon matTooltip="View Plans">remove_red_eye</mat-icon>
+    </button>
+  </mat-toolbar>
+</div>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+
+    <div>
+      <mat-toolbar class="!h-16 mat-elevation-z0 !bg-slate-200">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>PLAN THIS WEEK</span>
+      </mat-toolbar>
+    </div>
+
+    <mat-accordion>
+      <div class="m-2 h-12 hover:bg-slate-200 rounded-md" routerLink="Plans">
+        <mat-nav-list>
+          <h1 class="ml-4 mt-2 font-semibold">My Plans</h1>
+        </mat-nav-list>
+      </div>
+
+      <div class="m-2 h-12 hover:bg-slate-200 rounded-md">
+        <mat-nav-list>
+          <h1 class="ml-4 mt-2 font-semibold">Plan</h1>
+        </mat-nav-list>
+      </div>
+
+    </mat-accordion>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
