@@ -1,0 +1,77 @@
+<div>
+  <mat-toolbar class="!h-16 mat-elevation-z3 !bg-slate-50">
+    <span>Users</span>
+    <span class="example-spacer"></span>
+    <button mat-raised-button class="rounded-2xl" (click)="newUser()">New User </button>
+  </mat-toolbar>
+</div>
+
+<section class="table-container mat-elevation-z2 mx-2" tabindex="0">
+  <h2 class="h-8 font-bold mx-2 my-1 mt-3 text-lg">Enrolled Users</h2>
+  <table class="mat-elevation-z2" mat-table [dataSource]="usersDataSource" matSort fxFlexFill>
+
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </th>
+
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let index = index"> {{ index + 1 }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef class="mat-header-cell" mat-sort-header scope="col">Username</th>
+      <td mat-cell *matCellDef="let s">
+        {{ s.username}}
+      </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef class="mat-header-cell" mat-sort-header scope="col"> Email Address</th>
+      <td mat-cell *matCellDef="let s">
+        {{ s.email}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="roles">
+      <th mat-header-cell *matHeaderCellDef class="mat-header-cell" mat-sort-header scope="col"> User Roles</th>
+      <td mat-cell *matCellDef="let s">
+        {{ s.roles.name}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef class="mat-header-cell" mat-sort-header scope="col">Action </th>
+      <td mat-cell *matCellDef="let s">
+        <a mat-flat-button (click)="onEditUSer(s)" class="rounded"
+          style="background-color: rgb(141, 141, 206); margin-right: 10px; color: white;" matTooltip="Edit Item">Edit
+        </a>
+
+        <a mat-flat-button (click)="onDeleteTask(s)" class="rounded"
+        style="background-color: rgb(141, 141, 206); margin-right: 10px; color: white;" matTooltip="Delete Task">Delete
+      </a>
+       </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="mat-header-row tasks-header"
+      style="background-color: rgb(226, 246, 252);"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns" class="mat-row !h-5 hover:bg-sky-100"></tr>
+
+  </table>
+
+  <div style="margin-top: 5px"></div>
+  <div fxLayout fxLayoutAlign="end">
+    <mat-paginator [pageSizeOptions]="[30, 60, 90, 150]" pageSize="15" length="100" aria-label="Select page of users"></mat-paginator>
+  </div>
+</section>

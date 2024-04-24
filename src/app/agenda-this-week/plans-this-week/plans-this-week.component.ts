@@ -27,17 +27,18 @@ export class PlansThisWeekComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-   dataChangeSubscription: Subscription;
+  dataChangeSubscription: Subscription;
 
   constructor(private _dialog: MatDialog, private _planService: PlansService) {
-    this.dataChangeSubscription = _planService.dataChangedEvent$.subscribe(()=>{
-      this.getTasksList()
-    })
+    this.dataChangeSubscription = _planService.dataChangedEvent$.subscribe(
+      () => {
+        this.getTasksList();
+      }
+    );
   }
 
   ngOnInit(): void {
     // this.tasksDataSource.data = tasksList;
-
     this.getTasksList();
   }
 
@@ -47,42 +48,39 @@ export class PlansThisWeekComponent implements OnInit {
     });
   }
 
-
-
   getTasksList() {
     this._planService.getTasks().subscribe({
       next: (resp) => {
         console.log(resp);
         this.tasksDataSource.data = resp;
       },
+
       error: (err) => {
-        console.log('lllllllll');
+        console.log(err);
       },
     });
   }
 
   onEditTask(selectedTask: GetTasksDTO) {
     this._dialog.open(UpdatePlanComponent, {
-      data:selectedTask,
+      data: selectedTask,
       disableClose: true,
     });
   }
 
-  onDeleteTask(selectedTask:GetTasksDTO) {
+  onDeleteTask(selectedTask: GetTasksDTO) {
     this._dialog.open(DeletePlanComponent, {
       disableClose: true,
-      data:selectedTask
+      data: selectedTask,
     });
   }
 
-  /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.tasksDataSource.data.length;
     return numSelected === numRows;
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected()
       ? this.selection.clear()

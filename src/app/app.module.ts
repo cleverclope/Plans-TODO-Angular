@@ -7,13 +7,11 @@ import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
-import { UsersComponent } from './users/users.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    UsersComponent
+    AppComponent
      ],
   imports: [
     BrowserModule,

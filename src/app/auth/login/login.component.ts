@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
     return this.loginFormGroup.value
   }
 
-
   loginHere(){
     const loginData:LoginDTO={
       username: this.formData.username,
@@ -58,7 +57,6 @@ export class LoginComponent implements OnInit {
         if(this.roles=['user']){
           this._router.navigateByUrl('ThisWeek')
         }
-
 
         // this.reloadPage();
         console.log(resp);
