@@ -1,1 +1,36 @@
-<button mat-raised-button routerLink="../../ThisWeek">login works!</button>
+<div class="flex justify-center">
+
+  <div class="flex-row">
+    <h1 class="mt-32 mb-8 flex justify-center font-semibold text-xl" mat-raised-button>login works!</h1>
+    <form [formGroup]="loginFormGroup">
+      <div class="">
+        <mat-form-field>
+          <label for="Username">Enter Username</label>
+          <input matInput type="text" formControlName="username" placeholder="Enter Username">
+        </mat-form-field>
+      </div>
+
+      <div class="">
+        <mat-form-field>
+          <label for="password">Enter Password</label>
+          <input matInput type="password" name="password" formControlName="password" placeholder="Enter password">
+        </mat-form-field>
+      </div>
+    </form>
+
+    <div class="flex justify-center">
+      <button mat-raised-button type="button" class="mx-1" routerLink="../Enroll">Register</button>
+      <button mat-raised-button type="button" class="mx-1" (click)="loginHere()">Login</button>
+    </div>
+
+    <div class="my-10 flex justify-center">
+      <a type="button">Forgot Password</a>
+    </div>
+
+    <div class="flex justify-center text-cyan-700" *ngIf="isLoggedIn">
+      Logged in as {{ roles }}.
+    </div>
+
+  </div>
+
+</div>

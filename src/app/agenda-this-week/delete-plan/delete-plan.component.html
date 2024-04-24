@@ -1,1 +1,25 @@
-<p>delete-plan works!</p>
+<div class="task">
+  <header>
+    <button class="btn" mat-button (click)="onCloseDialog()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </header>
+
+  <mat-dialog-content class="mat-typography" fxLayout="row">
+
+    <h1 class="pt-8 pb-8">Are you sure about this deleting ?</h1>
+
+  </mat-dialog-content>
+
+  <div fxLayout="row" fxLayoutGap="20px">
+    <div fxFlex style="text-align: center">
+
+      <button mat-raised-button type="submit" (click)="deleteTask()" color="primary">
+        <mat-icon>check</mat-icon>Yes
+      </button>
+
+      <button mat-raised-button type="submit" (click)="deleteTask()" color="primary">
+        <mat-icon>close</mat-icon>No
+      </button>
+    </div>
+  </div>

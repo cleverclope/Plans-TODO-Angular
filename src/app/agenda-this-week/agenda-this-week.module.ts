@@ -27,7 +27,8 @@ import { PlansService } from './plans.service';
     CommonModule,
     AgendaThisWeekRoutesModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+
   ],
 
   providers:[PlansService]

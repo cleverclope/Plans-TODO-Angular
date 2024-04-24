@@ -1,1 +1,44 @@
-<p>enroll works!</p>
+<div class="flex justify-center">
+
+  <div class="flex-row">
+    <h1 class="mt-32 mb-8 flex justify-center font-semibold text-xl" mat-raised-button>REGISTER !</h1>
+    <form [formGroup]="enrollmentFormGroup">
+      <div class="">
+        <mat-form-field>
+          <label for="Username">Enter Username</label>
+          <input matInput type="text" name="username" placeholder="Enter Username" formControlName="username" required>
+        </mat-form-field>
+      </div>
+
+      <div class="">
+        <mat-form-field>
+          <label for="Username">Enter Email Address</label>
+          <input matInput type="email" name="username" placeholder="Enter Email" formControlName="email" required>
+        </mat-form-field>
+      </div>
+
+      <!-- <div class="">
+        <mat-form-field>
+          <label for="Role">Select Role</label>
+          <mat-select required formControlName="role">
+            <mat-option *ngFor="let role of roles" [value]="role">{{role.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div> -->
+
+      <div class="">
+        <mat-form-field>
+          <label for="password">Enter Password</label>
+          <input matInput type="password" name="password" name="password" placeholder="Enter password"
+            formControlName="password" required>
+        </mat-form-field>
+      </div>
+    </form>
+
+    <div class="flex justify-center">
+      <button mat-raised-button type="button" class="mx-1" routerLink="../Login">Login</button>
+      <button mat-raised-button type="button" class="mx-1" (click)="doEnrollHere()">Register</button>
+    </div>
+  </div>
+
+</div>

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { GetTasksDTO, TasksDTO } from '../dto';
 import { PlansService } from '../plans.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update-plan',
@@ -18,7 +19,8 @@ export class UpdatePlanComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: GetTasksDTO,
     private _dialogRef: MatDialogRef<UpdatePlanComponent>,
     private _fb: FormBuilder,
-    private _planService: PlansService
+    private _planService: PlansService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -26,8 +28,7 @@ export class UpdatePlanComponent implements OnInit {
       taskName: [
         this.data.taskName,
         [
-          Validators.required,
-          Validators.pattern('^[A-Za-z][A-Za-z0-9_]{2,29}$'),
+          Validators.required
         ],
       ],
     });
@@ -44,11 +45,14 @@ export class UpdatePlanComponent implements OnInit {
     this._planService.editTask(updateDetails, this.data.id).subscribe({
       next: (resp) => {
         console.log(resp);
+        this._planService.notifyOnDataChange();
         this.onCloseDialog()
+        this.toastr.success('Task Updated !','SUCCESSFUL')
       },
       error: (err) => {
         console.log(err);
         this.onCloseDialog()
+        this.toastr.error('Something Went Wrong','FAILED EDITING')
       },
     });
   }

@@ -8,8 +8,9 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { PlansService } from '../plans.service';
-import { DeletedSuccessfullyDialogComponent } from '../dialog/deleted-successfully-dialog/deleted-successfully-dialog.component';
 import { UpdatePlanComponent } from '../update-plan/update-plan.component';
+import { DeletePlanComponent } from '../delete-plan/delete-plan.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-plans-this-week',
@@ -26,7 +27,13 @@ export class PlansThisWeekComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private _dialog: MatDialog, private _planService: PlansService) {}
+   dataChangeSubscription: Subscription;
+
+  constructor(private _dialog: MatDialog, private _planService: PlansService) {
+    this.dataChangeSubscription = _planService.dataChangedEvent$.subscribe(()=>{
+      this.getTasksList()
+    })
+  }
 
   ngOnInit(): void {
     // this.tasksDataSource.data = tasksList;
@@ -39,6 +46,8 @@ export class PlansThisWeekComponent implements OnInit {
       disableClose: true,
     });
   }
+
+
 
   getTasksList() {
     this._planService.getTasks().subscribe({
@@ -59,9 +68,10 @@ export class PlansThisWeekComponent implements OnInit {
     });
   }
 
-  onDeleteTask() {
-    this._dialog.open(DeletedSuccessfullyDialogComponent, {
+  onDeleteTask(selectedTask:GetTasksDTO) {
+    this._dialog.open(DeletePlanComponent, {
       disableClose: true,
+      data:selectedTask
     });
   }
 

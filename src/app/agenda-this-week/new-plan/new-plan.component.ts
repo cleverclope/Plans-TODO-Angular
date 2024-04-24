@@ -19,15 +19,10 @@ export class NewPlanComponent implements OnInit {
     private _fb: FormBuilder,
     private _plansService: PlansService
   ) {}
+
   ngOnInit(): void {
     this.newTaskFormGroup = this._fb.group({
-      taskName: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern('^[A-Za-z][A-Za-z0-9_]{2,29}$'),
-        ],
-      ],
+      taskName: ['', [Validators.required]],
     });
   }
 
@@ -42,11 +37,12 @@ export class NewPlanComponent implements OnInit {
     this._plansService.createTask(task).subscribe({
       next: (resp) => {
         console.log('xxxxxxx');
-        this.onCloseDialog()
+        this._plansService.notifyOnDataChange();
+        this.onCloseDialog();
       },
       error: (err) => {
         console.log('yyyyyyyyy');
-        this.onCloseDialog()
+        this.onCloseDialog();
       },
     });
   }

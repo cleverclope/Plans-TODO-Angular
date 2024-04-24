@@ -9,12 +9,12 @@
 <mat-toolbar fxLayoutAlign="center center" class="new-inventory !text-xl">Create New Task for The Week</mat-toolbar>
 
     <mat-dialog-content class="mat-typography" fxLayout="row">
-      <form [formGroup]="newTaskFormGroup" onsubmit="newTaskFormGroup">
+      <form [formGroup]="newTaskFormGroup">
 
       <div fxLayoutGap="10px">
         <mat-form-field class="inventory-field">
           <mat-label>Task Name</mat-label>
-          <input matInput formControlName="taskName" placeholder="Enter Task Name" required minlength="3">
+          <input matInput formControlName="taskName" placeholder="Enter Task Name" required>
           <mat-icon matSuffix>info</mat-icon>
         </mat-form-field>
         </div>

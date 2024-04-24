@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl : "http://localhost:8088/tasks"
+  baseUrl : "http://localhost:8081/tasks",
+  baseUrlAuth:"http://localhost:8081/api/auth"
 };
 
 /*

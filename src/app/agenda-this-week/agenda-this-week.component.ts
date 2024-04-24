@@ -28,4 +28,8 @@ export class AgendaThisWeekComponent {
     this.isShowing = !this.isShowing;
   }
 
+  logout(){
+    
+  }
+
 }
